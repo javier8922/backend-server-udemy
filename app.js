@@ -6,6 +6,11 @@ var bodyParser = require('body-parser');
 var appRoutes = require('./routes/app');
 var usuarioRoutes = require('./routes/usuario');
 var loginRoutes = require('./routes/login');
+var hospitalRoutes = require('./routes/hospital');
+var medicoRoutes = require('./routes/medico');
+var busquedaRoutes = require('./routes/busqueda');
+var uploadRoutes = require('./routes/upload');
+var imagenesRoutes = require('./routes/imagenes');
 
 //Inicializar variables
 var app= express();
@@ -21,9 +26,21 @@ mongoose.connect('mongodb://localhost:27017/hospitalDB',(err,res)=>{
     console.log('Base de datos 27017: \x1b[32m%s\x1b[0m','onLine');
 });
 
+//server index config
+// var serverIndex = require('serve-index');
+// app.use(express.static(__dirname + '/'));
+// app.use('uploads', serverIndex(__dirname+'/uploads'));
+
+
 //Rutas
 app.use('/usuario', usuarioRoutes);
 app.use('/login', loginRoutes);
+app.use('/hospital', hospitalRoutes);
+app.use('/medico', medicoRoutes);
+app.use('/busqueda', busquedaRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/img', imagenesRoutes);
+
 app.use('/', appRoutes);
 
 
